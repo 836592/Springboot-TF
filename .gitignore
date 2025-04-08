@@ -1,0 +1,27 @@
+# IDE
+.idea/
+*.iml
+.project
+.settings/
+.classpath
+bin/
+.vscode/
+
+# Build
+target/
+build/
+out/
+*.jar
+*.war
+
+# Logs
+*.log
+logs/
+
+# Dependency directories
+**/node_modules/
+
+# Other
+*.swp
+*.swo
+.DS_Store
