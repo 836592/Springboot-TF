@@ -8,6 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class NotificationService {
+
     private final CopyOnWriteArrayList<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 
     public SseEmitter createEmitter() {
@@ -28,4 +29,3 @@ public class NotificationService {
         }
     }
 }
-

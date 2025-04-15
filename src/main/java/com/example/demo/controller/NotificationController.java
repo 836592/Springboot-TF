@@ -7,6 +7,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
 public class NotificationController {
+
     private final NotificationService notificationService;
 
     public NotificationController(NotificationService notificationService) {
@@ -18,4 +19,3 @@ public class NotificationController {
         return notificationService.createEmitter();
     }
 }
-
