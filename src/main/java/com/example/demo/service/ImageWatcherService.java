@@ -15,7 +15,8 @@ import java.util.concurrent.Executors;
 @Service
 public class ImageWatcherService {
 
-    private final Path uploadDir = Paths.get("/home/space/Documents/manualSpring/demo/uploads");
+	private final Path uploadDir = Paths.get("C:/Users/khtwo/OneDrive/文件/GitHub/Springboot-TF/uploads");
+
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final ImageAnalyzer imageAnalyzer;
     private final NotificationService notificationService;
