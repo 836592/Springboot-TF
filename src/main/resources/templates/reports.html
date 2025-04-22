@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Report List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: center;
+        }
+        img {
+            max-height: 80px;
+        }
+    </style>
+</head>
+<body>
+<h2>Report List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Site</th>
+        <th>Batch</th>
+        <th>Timestamp</th>
+        <th>Worker</th>
+        <th>Weather</th>
+        <th>Confidence</th>
+        <th>Grade</th>
+        <th>Status</th>
+        <th>Comment</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="report : ${reports}">
+        <td th:text="${report.id}"></td>
+        <td>
+            <img th:src="@{'/uploads/' + ${report.imageName}}" th:alt="${report.imageName}"/>
+            <div th:text="${report.imageName}"></div>
+        </td>
+        <td th:text="${report.site}"></td>
+        <td th:text="${report.batchId}"></td>
+        <td th:text="${report.timestamp}"></td>
+        <td th:text="${report.workerName}"></td>
+        <td th:text="${report.weather}"></td>
+        <td th:text="${report.confidence}"></td>
+        <td th:text="${report.grade}"></td>
+        <td th:text="${report.status}"></td>
+        <td th:text="${report.comment}"></td>
+        <td>
+            <form th:action="@{'/reports/' + ${report.id} + '/approve'}" method="post" style="display:inline">
+                <input type="text" name="comment" placeholder="Comment"/>
+                <button type="submit">Approve</button>
+            </form>
+            <form th:action="@{'/reports/' + ${report.id} + '/reject'}" method="post" style="display:inline">
+                <input type="text" name="comment" placeholder="Comment"/>
+                <button type="submit">Reject</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

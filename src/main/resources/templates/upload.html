@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Image for Analysis</title>
+</head>
+<body>
+<h2>Upload Image with Details</h2>
+<form method="POST" action="/api/analyze" enctype="multipart/form-data">
+    <label>Image: <input type="file" name="file" accept="image/*" required></label><br><br>
+    <label>Site: <input type="text" name="site" required></label><br><br>
+    <label>Batch ID: <input type="text" name="batchId" required></label><br><br>
+    <label>Worker Name: <input type="text" name="workerName" required></label><br><br>
+    <label>Weather: <input type="text" name="weather" required></label><br><br>
+    <button type="submit">Upload & Analyze</button>
+</form>
+</body>
+</html>
