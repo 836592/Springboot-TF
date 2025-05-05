@@ -1,0 +1,32 @@
+<!-- templates/my-reports.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>我的報告</title>
+</head>
+<body>
+<h2>我的報告</h2>
+<table border="1">
+    <tr>
+        <th>圖像名稱</th>
+        <th>地盤</th>
+        <th>批次</th>
+        <th>信心分數</th>
+        <th>等級</th>
+        <th>天氣</th>
+        <th>狀態</th>
+        <th>留言</th>
+    </tr>
+    <tr th:each="r : ${reports}">
+        <td th:text="${r.imageName}"></td>
+        <td th:text="${r.site}"></td>
+        <td th:text="${r.batchId}"></td>
+        <td th:text="${r.confidence}"></td>
+        <td th:text="${r.grade}"></td>
+        <td th:text="${r.weather}"></td>
+        <td th:text="${r.status}"></td>
+        <td th:text="${r.comment}"></td>
+    </tr>
+</table>
+</body>
+</html>

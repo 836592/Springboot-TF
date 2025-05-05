@@ -38,6 +38,12 @@ public class ReportService {
         return reportStore;
     }
 
+    public List<Report> getReportsByWorker(String workerName) {
+        return reportStore.stream()
+                .filter(r -> r.getWorkerName().equals(workerName))
+                .toList();
+    }
+
     // 透過 ID 搵報告
     public Report getReportById(Long id) {
         return reportStore.stream().filter(r -> r.getId().equals(id)).findFirst().orElse(null);

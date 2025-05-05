@@ -1,0 +1,18 @@
+<!-- templates/add-report.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>新增報告</title>
+</head>
+<body>
+<h2>新增報告</h2>
+<form method="post" action="/reports/save">
+    圖像名稱：<input type="text" name="imageName" required><br>
+    地盤名稱（Site）：<input type="text" name="site" required><br>
+    批次編號（Batch ID）：<input type="text" name="batchId" required><br>
+    天氣情況（Weather）：<input type="text" name="weather" required><br>
+    <button type="submit">提交</button>
+</form>
+
+</body>
+</html>
