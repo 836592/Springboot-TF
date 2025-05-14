@@ -9,12 +9,13 @@ import java.io.File;
 import java.io.IOException;
 
 @Controller
+@RequestMapping("/upload")
 public class ImageUploadController {
 
     // Path where images will be saved
     private final String uploadDir = "/home/space/Documents/manualSpring/demo/uploads";
 
-    @GetMapping("/")
+    @GetMapping
     public String showForm(Model model) {
         model.addAttribute("message", "Upload an image to analyze.");
         return "index";

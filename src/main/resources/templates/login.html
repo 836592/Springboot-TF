@@ -1,23 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-</head>
-<body>
-<h2>Login</h2>
-<form method="post" action="/login">
-    <label>Username: <input type="text" name="username" required></label><br><br>
-    <label>Password: <input type="password" name="password" required></label><br><br>
-    <label>Role:
-        <select name="role">
-            <option value="worker">Worker</option>
-            <option value="manager">Manager</option>
-        </select>
-    </label><br><br>
-    <button type="submit">Login</button>
-</form>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB_qXJGipM5AI9f9iatN5AbbyRK36GU8mw",
+            authDomain: "vinpractice.firebaseapp.com",
+            projectId: "vinpractice",
+            storageBucket: "vinpractice.appspot.com",
+            messagingSenderId: "168464691035",
+            appId: "1:168464691035:web:db53599aefee783fbdb47e"
+        };
 
-<div th:if="${error}" th:text="${error}" style="color:red;"></div>
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        async function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+                const idToken = await userCredential.user.getIdToken();
+
+                // Send the token to the backend
+                const response = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + idToken
+                    }
+                });
+
+                console.log('Response status:', response.status); // Debug response status
+                if (response.ok) {
+                    window.location.href = '/dashboard'; // Redirect to dashboard on success
+                } else {
+                    const errorText = await response.text();
+                    console.error('Error response:', errorText); // Debug error response
+                    alert('Login failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Login error:', error); // Debug login error
+                alert(error.message);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Login</h2>
+    <label>Email: <input type="email" id="email" required></label><br><br>
+    <label>Password: <input type="password" id="password" required></label><br><br>
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <a href="/auth/register">Register here</a></p>
 </body>
+
 </html>

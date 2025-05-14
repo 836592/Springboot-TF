@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB_qXJGipM5AI9f9iatN5AbbyRK36GU8mw",
+            authDomain: "vinpractice.firebaseapp.com",
+            projectId: "vinpractice",
+            storageBucket: "vinpractice.appspot.com",
+            messagingSenderId: "168464691035",
+            appId: "1:168464691035:web:db53599aefee783fbdb47e"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        async function register() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+                alert("Registration successful! You can now log in.");
+                window.location.href = '/auth/login'; // Redirect to login page
+            } catch (error) {
+                console.error('Registration error:', error); // Debug registration error
+                alert(error.message);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Register</h2>
+    <label>Email: <input type="email" id="email" required></label><br><br>
+    <label>Password: <input type="password" id="password" required></label><br><br>
+    <button onclick="register()">Register</button>
+</body>
+
+</html>

@@ -1,14 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script>
+        // Firebase configuration (same as in login.html)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        async function logout() {
+            await firebase.auth().signOut();
+            window.location.href = '/auth/logout'; // Redirect to logout endpoint
+        }
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                document.getElementById('user-email').innerText = user.email;
+            } else {
+                window.location.href = '/login'; // Redirect to login if not authenticated
+            }
+        });
+    </script>
 </head>
 <body>
-<h2>Welcome, <span th:text="${user.username}"></span>!</h2>
-<p>Your role: <span th:text="${user.role}"></span></p>
+    <h2>Welcome, <span id="user-email"></span>!</h2>
 
-<a href="/reports">Go to Reports</a><br>
-<a href="/logout">Logout</a>
+    <ul>
+        <li><a href="/upload">Upload an Image</a></li>
+        <li><a href="/reports">View Reports</a></li>
+    </ul>
+
+    <button onclick="logout()">Logout</button>
 </body>
 </html>
