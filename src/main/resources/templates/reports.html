@@ -20,6 +20,13 @@
 </head>
 <body>
 <h2>Report List</h2>
+<p th:if="${session.loggedInUser != null}" style="text-align:right">
+    Logged in as <b th:text="${session.loggedInUser.username}"></b> |
+    <span th:if="${session.loggedInUser.role == 'manager'}"><a href="/dashboard">Manager Dashboard</a> | </span>
+    <span th:if="${session.loggedInUser.role == 'worker'}"><a href="/my-reports">My Reports</a> | </span>
+    <a href="/logout">Logout</a>
+</p>
+
 <div th:if="${notLoggedIn}">
     <p>You must be logged in to view reports.</p>
 </div>
@@ -51,7 +58,7 @@
             <td th:text="${report.site}"></td>
             <td th:text="${report.batchId}"></td>
             <td th:text="${report.timestamp}"></td>
-            <td th:text="${report.workerName}"></td>
+            <td th:text="${report.workerId}"></td>
             <td th:text="${report.weather}"></td>
             <td th:text="${report.confidence}"></td>
             <td th:text="${report.grade}"></td>

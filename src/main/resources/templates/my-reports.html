@@ -1,32 +1,53 @@
-<!-- templates/my-reports.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>我的報告</title>
+    <meta charset="UTF-8">
+    <title>我提交的報告</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: center;
+        }
+        img {
+            max-height: 80px;
+        }
+    </style>
 </head>
 <body>
-<h2>我的報告</h2>
-<table border="1">
+<h2>我提交的報告</h2>
+<table>
+    <thead>
     <tr>
-        <th>圖像名稱</th>
-        <th>地盤</th>
+        <th>圖片</th>
+        <th>工地</th>
         <th>批次</th>
+        <th>天氣</th>
         <th>信心分數</th>
         <th>等級</th>
-        <th>天氣</th>
         <th>狀態</th>
-        <th>留言</th>
+        <th>管理員批註</th>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="r : ${reports}">
-        <td th:text="${r.imageName}"></td>
+        <td>
+            <img th:src="@{'/uploads/' + ${r.imageName}}" th:alt="${r.imageName}" />
+            <div th:text="${r.imageName}"></div>
+        </td>
         <td th:text="${r.site}"></td>
         <td th:text="${r.batchId}"></td>
+        <td th:text="${r.weather}"></td>
         <td th:text="${r.confidence}"></td>
         <td th:text="${r.grade}"></td>
-        <td th:text="${r.weather}"></td>
         <td th:text="${r.status}"></td>
         <td th:text="${r.comment}"></td>
     </tr>
+    </tbody>
 </table>
 </body>
 </html>

@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+
 
 import java.util.Map;
 
@@ -34,6 +36,14 @@ public class UserController {
         return "login";
     }
 
+    @GetMapping("/dashboard")
+    public String dashboard(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("loggedInUser");
+        if (user == null) return "redirect:/login";
+
+        model.addAttribute("user", user);
+        return "dashboard"; // 你需要有個 dashboard.html 畫面
+    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
